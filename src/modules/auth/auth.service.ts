@@ -290,6 +290,12 @@ export class AuthService {
         // Send mail
         console.log({ verificationLink });
 
+        try {
+            await this.mailService.sendTestEmail(email, verificationLink);
+        } catch (error) {
+            this.logger.error(`Error sending otp to : ${email}`);
+        }
+
         return new HttpResponseDto(
             UserMessages.Success.Invited
         );
@@ -315,6 +321,13 @@ export class AuthService {
 
         // Send mail
         console.log({ verificationLink });
+
+        try {
+            await this.mailService.sendTestEmail(user.email, verificationLink);
+        } catch (error) {
+            this.logger.error(`Error sending otp to : ${user.email}`);
+        }
+
 
     }
 }
